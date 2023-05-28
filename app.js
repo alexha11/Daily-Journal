@@ -7,17 +7,19 @@ const aboutContent = "Keep going bro";
 const contactContent = "04157054441";
 
 const app = express();
+var posts = []
 
 app.set('view engine', 'ejs');
-
+ 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
     res.render("home", {
         homeStartingContent: homeStartingContent,
+        posts: posts
     });
-    
+
 });
 
 
@@ -39,11 +41,14 @@ app.get("/compose", (req, res) => {
     });
 });
 
-
-
-
-
-
+app.post("/compose", (req, res) => {
+    var post = {
+        title: req.body.titleCompose,
+        body: req.body.bodyCompose
+    }
+    res.redirect("/");
+    posts.push(post);
+});
 
 
 
