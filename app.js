@@ -50,6 +50,23 @@ app.post("/compose", (req, res) => {
     posts.push(post);
 });
 
+app.get("/posts/:topic", (req, res) => {
+    //console.log(req.params.topic);
+    const requestedTitle = req.params.topic;
+    // for(let i = 0; i < posts.length; i++) {
+    //     var storedTitle = posts[i].title;
+    //     console.log(storedTitle + " ")
+    //     if(requestedTitle === posts[i].title) {
+    //         console.log("yeah, thats right man");
+    //     }
+    // }
+    posts.forEach(post => {
+        const storedTitle = post.title;
+        if(storedTitle === requestedTitle) {
+            console.log("thats right");
+        }
+    })
+})
 
 
 
