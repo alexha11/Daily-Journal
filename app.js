@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
+const _ = require('lodash')
 
 const homeStartingContent = "duong dep trai";
 const aboutContent = "Keep going bro";
@@ -52,7 +53,7 @@ app.post("/compose", (req, res) => {
 
 app.get("/posts/:topic", (req, res) => {
     //console.log(req.params.topic);
-    const requestedTitle = req.params.topic;
+    const requestedTitle = _.lowerCase(req.params.topic);
     // for(let i = 0; i < posts.length; i++) {
     //     var storedTitle = posts[i].title;
     //     console.log(storedTitle + " ")
@@ -62,8 +63,11 @@ app.get("/posts/:topic", (req, res) => {
     // }
     posts.forEach(post => {
         const storedTitle = post.title;
-        if(storedTitle === requestedTitle) {
-            console.log("thats right");
+        if(_.lowerCase(storedTitle) === requestedTitle) {
+            res.render("post", {
+                title: post.title,
+                content: post.content
+            });
         }
     })
 })
