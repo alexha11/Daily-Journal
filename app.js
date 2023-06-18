@@ -66,7 +66,7 @@ app.get("/posts/:topic", (req, res) => {
         if(_.lowerCase(storedTitle) === requestedTitle) {
             res.render("post", {
                 title: post.title,
-                content: post.content
+                content: post.body
             });
         }
     })
